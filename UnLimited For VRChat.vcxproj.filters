@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="il2cpp resolver">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\API\Component.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\API\GameObject.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\API\Object.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\API\Transform.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\Defines.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\Includes.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\Obfuscators.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\Structures\Engine.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\Structures\il2cpp.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\Structures\Includes.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Unity\Structures\System_String.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions\Class.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions\ResolveCall.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions\String.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes.hpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Unity\API\Component.cpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Unity\API\GameObject.cpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Unity\API\Object.cpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Unity\API\Transform.cpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Unity\Obfuscators.cpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions\String.cpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>il2cpp resolver</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
