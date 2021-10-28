@@ -102,6 +102,7 @@ void ThreadInit(HMODULE hModule)
         SetupText(path.c_str(), component.c_str(), String2WString(str).c_str());
     }
     SetupText("UserInterface/MenuContent/Screens/Settings/TitlePanel/VersionText", "Text", (wchar_t*)L"https://github.com/ExtremeBlackLiu/VRChatMultiLanguage");
+    in.close();
     FreeLibraryAndExitThread(hModule, 0x0);
 }
 
