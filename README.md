@@ -1,5 +1,6 @@
 # VRChatMultiLanaguge
 VRChat Multi Language Support
+
 [中文说明戳这里](https://github.com/extremeblackliu/VRChatMultiLanguage/blob/main/readme_cn.md)
 
 # Libraries
