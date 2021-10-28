@@ -8,7 +8,7 @@ VRChat多语言支持
 # 如何使用它
 - 到 https://github.com/extremeblackliu/VRChat-ModuleLoader/releases/tag/release 下载 Loader.exe
 - 到 https://github.com/extremeblackliu/VRChatMultiLanaguge/releases/tag/release 下载 VRChatMultiLanguage.dll
-- 到 https://github.com/extremeblackliu/VRChatMultiLanguage-File 下载当前你国家的语言文件
+- 到 https://github.com/extremeblackliu/VRChatMultiLanguage-File 下载当前你需要的语言文件
 - 将 Loader.exe 和 VRChatMultiLanguage.dll 放在同一个目录
 - 将 语言文件 放到 VRChat 目录下
 - 启动 Loader.exe
