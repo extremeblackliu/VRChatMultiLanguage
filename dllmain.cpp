@@ -1,4 +1,4 @@
-﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
+// dllmain.cpp : 定义 DLL 应用程序的入口点。
 /*
 
         VRChat Multi Language Loader
@@ -8,6 +8,7 @@
         Librarys:
             nlohmann/json (nlohmann)
             sneakyevilSK/IL2CPP_Resolver (sneakyevil)
+            sneakyevilSK/VersionHijack (sneakyevil)
     -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
         this repo:
             ExtremeBlackLiu/VRChatMultiLanguage (me)
@@ -22,6 +23,7 @@
 #include <iostream>
 #include <fstream>
 #include "json.hpp"
+#include "VersionHijack.hpp"
 
 using namespace nlohmann;
 
@@ -72,7 +74,19 @@ void throwError(HMODULE hModule,const char* errorText)
 
 void ThreadInit(HMODULE hModule)
 {
+    while (!GetModuleHandleA("GameAssembly.dll"))
+    {
+        Sleep(10000);
+    }
+    
     IL2CPP::Initialize();
+
+    Unity::CGameObject* pTestObj = Unity::GameObject::Find("UserInterface/Canvas_QuickMenu(Clone)");
+    while (!pTestObj)
+    {
+        pTestObj = Unity::GameObject::Find("UserInterface/Canvas_QuickMenu(Clone)");
+        Sleep(5000);
+    }
 
     std::ifstream in("Language.json");
     json parser;
@@ -101,11 +115,10 @@ void ThreadInit(HMODULE hModule)
         std::string component = parser["Objects"][i]["component"];
         SetupText(path.c_str(), component.c_str(), String2WString(str).c_str());
     }
-    SetupText("UserInterface/MenuContent/Screens/Settings/TitlePanel/VersionText", "Text", (wchar_t*)L"https://github.com/ExtremeBlackLiu/VRChatMultiLanguage");
+    //SetupText("UserInterface/MenuContent/Screens/Settings/TitlePanel/VersionText", "Text", (wchar_t*)L"https://github.com/ExtremeBlackLiu/VRChatMultiLanguage");
     in.close();
     FreeLibraryAndExitThread(hModule, 0x0);
 }
-
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -115,10 +128,10 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
+         VersionHijack::Initialize();
          DisableThreadLibraryCalls(hModule);
          HANDLE hThread = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)ThreadInit, hModule, 0, 0);
          break;
     }
     return TRUE;
 }
-
