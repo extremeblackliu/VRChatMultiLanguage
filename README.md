@@ -1,19 +1,16 @@
 # VRChatMultiLanaguge
-VRChat Multi Language Support
+VRChat多国语言支持插件
 
-[中文说明戳这里](https://github.com/extremeblackliu/VRChatMultiLanguage/blob/main/readme_cn.md)
-
-# Libraries
+# 所用到的库
  - [Il2cpp_Resolver](https://github.com/sneakyevilSK/IL2CPP_Resolver "Il2cppResolver") by sneakyevil
+ - [VersionHijack](https://github.com/sneakyevilSK/VersionHijack "VersionHijack") by sneakyevil
  - [nlohmann json](https://github.com/nlohmann/json "nlohmann json") by nlohmann
 
 # How To Use it
-- Go https://github.com/extremeblackliu/VRChat-ModuleLoader/releases/tag/release download Loader.exe
-- Go https://github.com/extremeblackliu/VRChatMultiLanaguge/releases/tag/release download VRChatMultiLanguage.dll
-- Go https://github.com/extremeblackliu/VRChatMultiLanguage-File download the language file that matches the language you are using
-- Put Loader.exe and VRChatMultiLanguage.dll in Same Folder
-- Put Language File into VRChat Game Folder
-- Launch Loader.exe
+- 到 https://github.com/extremeblackliu/VRChatMultiLanaguge/releases/tag/release 下载 version.dll
+- 到 https://github.com/extremeblackliu/VRChatMultiLanguage-File 下载语言文件
+- 把 语言文件 和 version.dll 放到VRChat的根目录
+- 之后每次启动都会自动进行汉化啦
 
-# You are using "MelonLoader" ?
-Check here: https://github.com/XLjiangA/VRChat-ModuleLoader-Csharp
+# 这个和MelonLoader不兼容，你在用 "MelonLoader" ?
+看看这里: https://github.com/XLjiangA/VRChat-ModuleLoader-Csharp
