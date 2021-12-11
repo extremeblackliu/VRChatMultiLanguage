@@ -6,7 +6,7 @@ VRChat多国语言支持插件
  - [VersionHijack](https://github.com/sneakyevilSK/VersionHijack "VersionHijack") by sneakyevil
  - [nlohmann json](https://github.com/nlohmann/json "nlohmann json") by nlohmann
 
-# How To Use it
+# 如何使用？
 - 到 https://github.com/extremeblackliu/VRChatMultiLanaguge/releases/tag/release 下载 version.dll
 - 到 https://github.com/extremeblackliu/VRChatMultiLanguage-File 下载语言文件
 - 把 语言文件 和 version.dll 放到VRChat的根目录
