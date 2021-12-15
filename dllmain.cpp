@@ -14,7 +14,7 @@
             ExtremeBlackLiu/VRChatMultiLanguage (me)
 
 */
-
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "Main.hpp"
 #include <stdio.h>
@@ -24,8 +24,11 @@
 #include <fstream>
 #include "json.hpp"
 #include "VersionHijack.hpp"
+#include "MinHook.h"
 
 using namespace nlohmann;
+
+HMODULE g_module;
 
 void SetText(Unity::CComponent* ptext,const wchar_t* newText)
 {
@@ -72,52 +75,87 @@ void throwError(HMODULE hModule,const char* errorText)
     return;
 }
 
-void ThreadInit(HMODULE hModule)
+void* OUpdate = nullptr;
+
+void hk_onUpdate(void* thisptr)
 {
+    static bool init = false;
+    if (!init)
+    {
+        init = true;
+        printf("[VRChat2Chinese]Start to work...\n");
+        std::ifstream in("Language.json");
+        json parser;
+        if (!in.is_open())
+        {
+            throwError(g_module, "Unable to Open the Language.json");
+            return;
+        }
+        if (!in.good())
+        {
+            throwError(g_module, "Bad Reading Language.json");
+            return;
+        }
+        in >> parser;
+
+        size_t object_count = parser["Objects"].size();
+        if (object_count == 0)
+        {
+            throwError(g_module, "Objects Count == 0");
+            return;
+        }
+        for (size_t i = 0; i < object_count; i++)
+        {
+            std::string str = parser["Objects"][i]["lang"].get<std::string>();
+            std::string path = parser["Objects"][i]["path"];
+            std::string component = parser["Objects"][i]["component"];
+            SetupText(path.c_str(), component.c_str(), String2WString(str).c_str());
+        }
+        in.close();
+        printf("[VRChat2Chinese]done!\n");
+    }
+    return ((void(__fastcall*)(void* thisptr))(OUpdate))(thisptr);
+}
+
+void ThreadInit(HMODULE hModule)
+{      
+
     while (!GetModuleHandleA("GameAssembly.dll"))
     {
         Sleep(10000);
     }
+
+    printf("[VRChat2Chinese]GameAssembly.dll Founded\n");
+    
+    g_module = hModule;
     
     IL2CPP::Initialize();
+    MH_Initialize();
 
-    Unity::CGameObject* pTestObj = Unity::GameObject::Find("UserInterface/Canvas_QuickMenu(Clone)");
-    while (!pTestObj)
+    printf("[VRChat2Chinese]Il2cpp Resolver initialize\n");
+    auto object = Unity::GameObject::Find("UserInterface/Canvas_QuickMenu(Clone)");
+    printf("[VRChat2Chinese]object = %p\n",object);
+    while (!object)
     {
-        pTestObj = Unity::GameObject::Find("UserInterface/Canvas_QuickMenu(Clone)");
-        Sleep(5000);
+        object = Unity::GameObject::Find("UserInterface/Canvas_QuickMenu(Clone)");
+        printf("[VRChat2Chinese]object = %p\n", object);
+        Sleep(1000);
     }
 
-    std::ifstream in("Language.json");
-    json parser;
-    if (!in.is_open())
+    printf("[VRChat2Chinese]test object found\n");
+
+    void* onUpdate = IL2CPP::Class::Utils::GetMethodPointer("BestHTTP.HTTPManager", "OnUpdate"); //在Unity的Update函数里面操作能够触发GC，否则直接操作可能导致客户端崩溃
+    printf("[VRChat2Chinese]onUpdate = %p\n",onUpdate);
+    if (!onUpdate)
     {
-        throwError(hModule, "Unable to Open the Language.json");
+        throwError(hModule, "Couldnt find Update");
         return;
     }
-    if (!in.good())
-    {
-        throwError(hModule, "Bad Reading Language.json");
-        return;
-    }
-    in >> parser;
+    MH_CreateHook(onUpdate, hk_onUpdate, &OUpdate);
 
-    size_t object_count = parser["Objects"].size();
-    if (object_count == 0)
-    {
-        throwError(hModule, "Objects Count == 0");
-        return;
-    }
-    for (size_t i = 0; i < object_count ; i++)
-    {
-        std::string str = parser["Objects"][i]["lang"].get<std::string>();
-        std::string path = parser["Objects"][i]["path"];
-        std::string component = parser["Objects"][i]["component"];
-        SetupText(path.c_str(), component.c_str(), String2WString(str).c_str());
-    }
-    //SetupText("UserInterface/MenuContent/Screens/Settings/TitlePanel/VersionText", "Text", (wchar_t*)L"https://github.com/ExtremeBlackLiu/VRChatMultiLanguage");
-    in.close();
-    FreeLibraryAndExitThread(hModule, 0x0);
+    MH_EnableHook(MH_ALL_HOOKS);
+
+    printf("[VRChat2Chinese]Enable Hook\n");
 }
 
 BOOL APIENTRY DllMain( HMODULE hModule,
