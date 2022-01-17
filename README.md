@@ -3,7 +3,7 @@ VRChat多国语言支持插件
 
 # 所用到的库
  - [Il2cpp_Resolver](https://github.com/sneakyevilSK/IL2CPP_Resolver "Il2cppResolver") by sneakyevil
- - [VersionHijack](https://github.com/sneakyevilSK/VersionHijack "VersionHijack") by sneakyevil
+ - [DLLHijack](https://github.com/sneakyevilSK/DLL-Hijack "DLL-Hijack") by sneakyevil
  - [nlohmann json](https://github.com/nlohmann/json "nlohmann json") by nlohmann
 
 # 如何使用？
